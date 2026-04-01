@@ -4,726 +4,770 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Club Vita — Live The Standard</title>
-<meta name="description" content="Club Vita is the premier lifestyle membership club in Southern California. Athletic. Financial. Spiritual. Relational. Community. Become a Founding Member.">
+<meta name="description" content="Club Vita is Southern California's premier lifestyle membership club. Athletics, finance, wellness, and community for driven young professionals. Apply for founding membership.">
 <meta property="og:title" content="Club Vita — Live The Standard">
-<meta property="og:description" content="The premier lifestyle membership club for driven young professionals in Southern California.">
+<meta property="og:description" content="The premier lifestyle membership club for driven young professionals in Southern California. Athletics. Finance. Wellness. Community.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://clubvita.com">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Club Vita — Live The Standard">
-<meta name="twitter:description" content="The premier lifestyle membership club for driven young professionals in Southern California.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:        #06100a;
-  --bg2:       #0b1e11;
-  --bg3:       #0f2616;
-  --gold:      #c9a96e;
-  --gold2:     #e4c98a;
-  --cream:     #f0ead8;
-  --cream2:    rgba(240,234,216,0.55);
-  --cream3:    rgba(240,234,216,0.25);
-  --green:     #2d5a3d;
-  --border:    rgba(201,169,110,0.14);
-  --border2:   rgba(201,169,110,0.28);
+  --bg: #06100a;
+  --bg2: #0a1a0f;
+  --bg3: #0e2415;
+  --gold: #c9a96e;
+  --gold2: #e4c98a;
+  --gold-dim: rgba(201,169,110,0.15);
+  --cream: #f0ead8;
+  --cream2: rgba(240,234,216,0.6);
+  --cream3: rgba(240,234,216,0.3);
+  --cream4: rgba(240,234,216,0.12);
+  --green: #2d5a3d;
+  --green2: #1a3d28;
 }
 
-html, body {
-  width: 100%; height: 100%;
-  overflow: hidden;
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
   background: var(--bg);
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'DM Sans', -apple-system, sans-serif;
   color: var(--cream);
-  user-select: none;
-  cursor: default;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-/* ---- DECK SYSTEM ---- */
-.deck { position: relative; width: 100vw; height: 100vh; }
-
-.slide {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.65s cubic-bezier(.4,0,.2,1);
-  overflow: hidden;
-}
-.slide.active { opacity: 1; pointer-events: all; }
-
-/* ---- NOISE TEXTURE ---- */
-.noise {
-  position: absolute; inset: 0; z-index: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity: 0.022; pointer-events: none;
-}
-
-/* ---- PROGRESS ---- */
-#progress {
-  position: fixed; bottom: 28px; right: 36px; z-index: 200;
-  display: flex; align-items: center; gap: 10px;
-}
-.dots { display: flex; gap: 5px; }
-.dot {
-  width: 5px; height: 5px; border-radius: 50%;
-  background: var(--cream3);
-  transition: all 0.35s ease; cursor: pointer;
-}
-.dot.on { background: var(--gold); width: 18px; border-radius: 3px; }
-.counter {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 10px; font-weight: 500;
-  letter-spacing: 0.14em; color: var(--cream3);
-}
-
-/* ---- NAV ARROWS ---- */
-.nav {
-  position: fixed; top: 50%; transform: translateY(-50%);
-  z-index: 200; width: 44px; height: 44px;
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0.35; transition: opacity 0.3s; cursor: pointer;
-}
-.nav:hover { opacity: 0.9; }
-.nav-l { left: 16px; }
-.nav-r { right: 16px; }
-.nav svg { width: 22px; height: 22px; stroke: var(--cream); fill: none; stroke-width: 1.5; }
-
-/* ---- SHARED TYPOGRAPHY ---- */
+/* ═══ UTILITY ═══ */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 .eyebrow {
   font-family: 'DM Sans', sans-serif;
-  font-size: 9.5px; font-weight: 600;
-  letter-spacing: 0.28em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 18px;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 16px;
 }
-.display {
+.section-title {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(38px, 5.5vw, 80px);
-  font-weight: 700; line-height: 1.0; color: var(--cream);
+  font-size: clamp(32px, 6vw, 56px);
+  font-weight: 700; line-height: 1.05;
+  color: var(--cream); margin-bottom: 20px;
 }
-.display-sm {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(22px, 2.8vw, 40px);
-  font-weight: 600; line-height: 1.15; color: var(--cream);
-}
-.body {
+.section-sub {
   font-family: 'DM Sans', sans-serif;
-  font-size: clamp(12px, 1.3vw, 15px);
-  font-weight: 300; line-height: 1.75; color: var(--cream2);
+  font-size: clamp(14px, 1.6vw, 17px);
+  font-weight: 300; line-height: 1.7;
+  color: var(--cream2); max-width: 600px;
 }
-.rule { width: 44px; height: 1px; background: var(--gold); margin: 22px 0; }
+.gold { color: var(--gold); }
+.italic { font-style: italic; }
+.rule { width: 48px; height: 1px; background: var(--gold); margin: 24px 0; }
+.rule-center { margin: 24px auto; }
 
-/* ---- ENTRY ANIMATIONS ---- */
-@keyframes fadeUp {
-  from { opacity:0; transform:translateY(22px); }
-  to   { opacity:1; transform:translateY(0); }
+/* ═══ REVEAL ANIMATIONS ═══ */
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
-.a { opacity: 0; }
-.slide.active .a { animation: fadeUp 0.75s ease forwards; }
-.slide.active .a:nth-child(1) { animation-delay: 0.08s; }
-.slide.active .a:nth-child(2) { animation-delay: 0.2s; }
-.slide.active .a:nth-child(3) { animation-delay: 0.33s; }
-.slide.active .a:nth-child(4) { animation-delay: 0.46s; }
-.slide.active .a:nth-child(5) { animation-delay: 0.56s; }
-.slide.active .a:nth-child(6) { animation-delay: 0.65s; }
-.slide.active .a:nth-child(7) { animation-delay: 0.72s; }
+.reveal.visible {
+  opacity: 1; transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
 
-/* ---- SLIDE 1 — COVER ---- */
-#s1 {
-  background: var(--bg);
-  flex-direction: column; text-align: center;
+/* ═══ NAVIGATION ═══ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 20px 0;
+  background: linear-gradient(to bottom, rgba(6,16,10,0.95) 0%, rgba(6,16,10,0.0) 100%);
+  transition: all 0.4s ease;
 }
-#s1 .radial {
+nav.scrolled {
+  background: rgba(6,16,10,0.97);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  padding: 14px 0;
+  border-bottom: 1px solid var(--gold-dim);
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px; font-weight: 700;
+  letter-spacing: 0.06em; color: var(--cream);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; align-items: center; gap: 32px; }
+.nav-links a {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--cream3); text-decoration: none;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--cream); }
+.nav-cta {
+  padding: 10px 24px !important;
+  border: 1px solid var(--gold) !important;
+  color: var(--gold) !important;
+  transition: all 0.3s !important;
+}
+.nav-cta:hover { background: var(--gold) !important; color: var(--bg) !important; }
+
+/* Mobile menu */
+.nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; }
+.nav-toggle span { width: 22px; height: 1.5px; background: var(--cream); transition: all 0.3s; }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: flex; }
+  .nav-links.open {
+    display: flex; flex-direction: column;
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: rgba(6,16,10,0.98);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    padding: 32px 24px; gap: 24px;
+    border-bottom: 1px solid var(--gold-dim);
+  }
+}
+
+/* ═══ HERO ═══ */
+.hero {
+  position: relative; min-height: 100vh; min-height: 100svh;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; overflow: hidden;
+}
+.hero-bg {
   position: absolute; inset: 0;
-  background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(45,90,61,0.18) 0%, transparent 70%);
+  background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1600&q=80');
+  background-size: cover; background-position: center 30%;
 }
-#s1 .ring {
-  position: absolute; border-radius: 50%; border: 1px solid var(--border);
-  top: 50%; left: 50%; transform: translate(-50%, -50%);
+.hero-bg::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(6,16,10,0.55) 0%,
+    rgba(6,16,10,0.7) 40%,
+    rgba(6,16,10,0.92) 100%
+  );
 }
-#s1 .ring1 { width: 520px; height: 520px; }
-#s1 .ring2 { width: 780px; height: 780px; border-color: rgba(201,169,110,0.05); }
-#s1 .ring3 { width: 1060px; height: 1060px; border-color: rgba(201,169,110,0.025); }
-
-#s1 .inner { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; }
-
-#s1 .emblem {
-  width: 60px; height: 60px; border-radius: 50%;
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 120px 24px 80px; max-width: 900px;
+}
+.hero-emblem {
+  width: 64px; height: 64px; border-radius: 50%;
   border: 1px solid var(--gold);
   display: flex; align-items: center; justify-content: center;
-  margin-bottom: 40px;
-  position: relative;
+  margin: 0 auto 36px; position: relative;
 }
-#s1 .emblem::before {
-  content: '';
-  position: absolute; inset: 5px; border-radius: 50%;
-  border: 1px solid rgba(201,169,110,0.25);
+.hero-emblem::before {
+  content: ''; position: absolute; inset: 5px;
+  border-radius: 50%; border: 1px solid rgba(201,169,110,0.3);
 }
-#s1 .emblem-v {
+.hero-emblem span {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 22px; font-style: italic; font-weight: 400;
-  color: var(--gold);
+  font-size: 24px; font-style: italic; color: var(--gold);
 }
-#s1 .name {
+.hero h1 {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(72px, 11vw, 148px);
-  font-weight: 700; letter-spacing: 0.08em;
-  text-transform: uppercase; line-height: 1;
-  color: var(--cream);
+  font-size: clamp(52px, 12vw, 130px);
+  font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; line-height: 0.9;
+  color: var(--cream); margin-bottom: 12px;
 }
-#s1 .tagline {
+.hero-tagline {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(18px, 2.4vw, 30px);
+  font-size: clamp(20px, 3.5vw, 34px);
   font-style: italic; font-weight: 300;
-  color: var(--gold); letter-spacing: 0.12em;
-  margin: 10px 0 36px;
+  color: var(--gold); letter-spacing: 0.1em;
+  margin-bottom: 40px;
 }
-#s1 .ornament { display: flex; align-items: center; gap: 18px; margin-bottom: 20px; }
-#s1 .ornament .line { width: 72px; height: 1px; }
-#s1 .ornament .line-l { background: linear-gradient(to right, transparent, var(--gold)); }
-#s1 .ornament .line-r { background: linear-gradient(to left, transparent, var(--gold)); }
-#s1 .ornament .diamond { width: 5px; height: 5px; background: var(--gold); transform: rotate(45deg); }
-#s1 .location {
-  font-family: 'DM Sans', sans-serif;
+.hero-ornament { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 12px; }
+.hero-ornament .line { width: 60px; height: 1px; }
+.hero-ornament .line-l { background: linear-gradient(to right, transparent, var(--gold)); }
+.hero-ornament .line-r { background: linear-gradient(to left, transparent, var(--gold)); }
+.hero-ornament .diamond { width: 5px; height: 5px; background: var(--gold); transform: rotate(45deg); }
+.hero-location {
   font-size: 10px; font-weight: 500;
   letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--cream3);
+  color: var(--cream3); margin-bottom: 48px;
 }
-
-/* ---- SLIDE 2 — THE HOOK ---- */
-#s2 { background: var(--bg); padding: 0 10vw; }
-#s2 .inner { max-width: 840px; position: relative; z-index: 2; }
-#s2 .ghost {
-  position: absolute; right: -40px; top: -60px;
-  font-family: 'Playfair Display', serif;
-  font-size: 260px; font-weight: 700; line-height: 1;
-  color: rgba(201,169,110,0.03); pointer-events: none;
-  user-select: none;
-}
-#s2 .quote {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(26px, 3.8vw, 54px);
-  font-weight: 400; font-style: italic;
-  line-height: 1.28; color: var(--cream); margin-bottom: 48px;
-}
-#s2 .quote em { color: var(--gold); font-style: italic; }
-#s2 .subline {
+.hero-cta {
+  display: inline-block;
   font-family: 'DM Sans', sans-serif;
-  font-size: clamp(11px, 1.2vw, 14px);
-  font-weight: 400; letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--cream2);
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--bg); background: var(--gold);
+  padding: 16px 48px; text-decoration: none;
+  transition: all 0.3s;
+}
+.hero-cta:hover { background: var(--gold2); transform: translateY(-1px); }
+.hero-scroll {
+  position: absolute; bottom: 36px; left: 50%;
+  transform: translateX(-50%); z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.hero-scroll span {
+  font-size: 8px; font-weight: 500;
+  letter-spacing: 0.3em; text-transform: uppercase; color: var(--cream3);
+}
+.hero-scroll .arrow {
+  width: 1px; height: 32px; background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollPulse 2s ease infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
 }
 
-/* ---- SLIDE 3 — THE GAP ---- */
-#s3 {
-  background: var(--bg); flex-direction: column;
-  align-items: flex-start; padding: 60px 7vw 0;
-  justify-content: flex-start;
+/* ═══ QUOTE SECTION ═══ */
+.quote-section {
+  padding: 120px 24px;
+  text-align: center;
+  position: relative;
 }
-#s3 .inner { width: 100%; z-index: 2; }
-#s3 .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; margin-top: 40px; }
-#s3 .card {
-  padding: 38px 30px;
-  background: rgba(255,255,255,0.018);
+.quote-section::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 50% 40% at 50% 50%, rgba(45,90,61,0.1) 0%, transparent 70%);
+}
+.quote-text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(24px, 4.5vw, 48px);
+  font-weight: 400; font-style: italic;
+  line-height: 1.3; color: var(--cream);
+  max-width: 820px; margin: 0 auto 32px;
+  position: relative; z-index: 1;
+}
+.quote-text em { color: var(--gold); font-style: italic; }
+.quote-attr {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; font-weight: 400;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--cream3); position: relative; z-index: 1;
+}
+
+/* ═══ PROBLEM SECTION ═══ */
+.problem { padding: 100px 0; }
+.problem-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2px; margin-top: 48px;
+}
+.problem-card {
+  padding: 40px 28px;
+  background: rgba(255,255,255,0.02);
   border-top: 1px solid rgba(255,255,255,0.05);
 }
-#s3 .card.vita {
-  background: rgba(201,169,110,0.045);
+.problem-card.vita {
+  background: rgba(201,169,110,0.04);
   border-top: 1px solid var(--gold);
 }
-#s3 .card-label {
-  font-family: 'DM Sans', sans-serif;
+.problem-card .label {
   font-size: 9px; font-weight: 600;
   letter-spacing: 0.26em; text-transform: uppercase;
   color: var(--gold); margin-bottom: 14px;
 }
-#s3 .card-title {
+.problem-card h3 {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(17px, 1.9vw, 25px);
-  font-weight: 600; color: var(--cream);
-  line-height: 1.2; margin-bottom: 16px;
+  font-size: clamp(18px, 2vw, 26px);
+  font-weight: 600; line-height: 1.2;
+  color: var(--cream); margin-bottom: 14px;
 }
-#s3 .card-body { font-size: clamp(11px, 1.05vw, 13.5px); line-height: 1.7; color: var(--cream2); }
+.problem-card p {
+  font-size: clamp(12px, 1.1vw, 14px);
+  font-weight: 300; line-height: 1.7; color: var(--cream2);
+}
 
-/* ---- SLIDE 4 — THE VISION ---- */
-#s4 {
-  background: linear-gradient(150deg, #06100a 0%, #0d2016 50%, #06100a 100%);
-  flex-direction: column; text-align: center; padding: 0 8vw;
+@media (max-width: 768px) {
+  .problem-grid { grid-template-columns: 1fr; }
 }
-#s4 .inner { max-width: 820px; z-index: 2; }
-#s4 .stmt {
+
+/* ═══ VISION SECTION ═══ */
+.vision {
+  padding: 120px 0;
+  text-align: center;
+  background: linear-gradient(160deg, var(--bg) 0%, var(--bg2) 50%, var(--bg) 100%);
+  position: relative;
+}
+.vision-stmt {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(20px, 2.8vw, 42px);
-  font-weight: 400; line-height: 1.38;
-  color: var(--cream); margin-bottom: 48px;
+  font-size: clamp(20px, 3vw, 38px);
+  font-weight: 400; line-height: 1.4;
+  color: var(--cream); max-width: 800px;
+  margin: 0 auto 56px;
 }
-#s4 .stmt strong { color: var(--gold); font-weight: 700; }
-#s4 .pillars { display: flex; justify-content: center; margin-top: 48px; }
-#s4 .pillar {
-  padding: 14px 28px;
-  border: 1px solid var(--border); margin-left: -1px;
+.vision-stmt strong { color: var(--gold); font-weight: 700; }
+.pillars {
+  display: flex; justify-content: center; flex-wrap: wrap;
+  gap: 0;
 }
-#s4 .pillar-name {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 9.5px; font-weight: 600;
-  letter-spacing: 0.2em; text-transform: uppercase;
+.pillar {
+  padding: 16px 28px;
+  border: 1px solid var(--gold-dim);
+  margin: -0.5px;
+}
+.pillar-name {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase;
   color: var(--gold);
 }
 
-/* ---- SLIDE 5 — THE MEMBER ---- */
-#s5 {
-  background: var(--bg);
-  align-items: flex-start; padding: 60px 7vw 0;
-  justify-content: flex-start;
-}
-#s5 .inner {
+/* ═══ EXPERIENCE / EVENTS SECTION ═══ */
+.experience { padding: 100px 0 60px; }
+.exp-grid {
   display: grid; grid-template-columns: 1fr 1fr;
-  gap: 72px; width: 100%; z-index: 2; padding-top: 12px;
-  align-items: start;
+  gap: 2px; margin-top: 56px;
 }
-#s5 .portrait {
+.exp-card {
+  position: relative; overflow: hidden;
+  min-height: 420px; display: flex;
+  flex-direction: column; justify-content: flex-end;
+  padding: 36px 32px; cursor: default;
+}
+.exp-card-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  transition: transform 0.6s ease;
+}
+.exp-card:hover .exp-card-bg { transform: scale(1.04); }
+.exp-card::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(6,16,10,0.92) 0%, rgba(6,16,10,0.4) 50%, rgba(6,16,10,0.2) 100%);
+}
+.exp-card-content { position: relative; z-index: 2; }
+.exp-card .pillar-tag {
+  display: inline-block;
+  font-size: 8px; font-weight: 700;
+  letter-spacing: 0.26em; text-transform: uppercase;
+  color: var(--gold); padding: 5px 12px;
+  border: 1px solid rgba(201,169,110,0.3);
+  margin-bottom: 14px;
+}
+.exp-card h3 {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(26px, 3.2vw, 48px);
-  font-weight: 600; line-height: 1.1;
-  color: var(--cream); margin-bottom: 20px;
+  font-size: clamp(22px, 2.6vw, 32px);
+  font-weight: 600; color: var(--cream);
+  margin-bottom: 12px; line-height: 1.15;
 }
-#s5 .portrait em { color: var(--gold); font-style: italic; }
-#s5 .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); margin-bottom: 24px; }
-#s5 .stat { background: var(--bg); padding: 22px 20px; }
-#s5 .stat-v {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(26px, 2.8vw, 38px);
-  font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 6px;
+.exp-card p {
+  font-size: 13px; font-weight: 300;
+  line-height: 1.65; color: var(--cream2);
+  max-width: 400px;
 }
-#s5 .stat-l {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 9.5px; font-weight: 600;
-  letter-spacing: 0.16em; text-transform: uppercase; color: var(--cream3);
+.exp-events {
+  margin-top: 16px; display: flex;
+  flex-wrap: wrap; gap: 6px;
 }
-#s5 .desires { border-top: 1px solid var(--border); padding-top: 20px; }
-#s5 .d {
-  display: flex; align-items: center; gap: 12px;
-  padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.035);
-  font-size: clamp(11px, 1.1vw, 13.5px); color: var(--cream2); font-weight: 300;
-}
-#s5 .d::before { content: '\2014'; color: var(--gold); font-size: 10px; flex-shrink: 0; }
-
-/* ---- SLIDE 6 — THE EXPERIENCE ---- */
-#s6 {
-  background: var(--bg);
-  align-items: flex-start; padding: 54px 5vw 0;
-  justify-content: flex-start;
-}
-#s6 .inner { width: 100%; z-index: 2; }
-#s6 .pgrid {
-  display: grid; grid-template-columns: repeat(5, 1fr);
-  gap: 1px; background: rgba(201,169,110,0.09); margin-top: 36px;
-}
-#s6 .p { background: var(--bg); padding: 28px 20px; }
-#s6 .p-icon { font-size: 26px; margin-bottom: 14px; }
-#s6 .p-name {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(15px, 1.4vw, 20px);
-  font-weight: 600; color: var(--gold); margin-bottom: 14px;
-}
-#s6 .p-ev {
-  font-size: clamp(10px, 0.95vw, 12px); font-weight: 300;
-  color: var(--cream2); padding: 4px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.038); line-height: 1.45;
-}
-#s6 .cta {
-  margin-top: 28px; text-align: center;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(15px, 1.8vw, 22px);
-  font-style: italic; font-weight: 300; color: var(--cream2);
+.exp-events span {
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--cream3); padding: 4px 10px;
+  background: rgba(255,255,255,0.06);
 }
 
-/* ---- SLIDE 7 — MEMBERSHIP ---- */
-#s7 {
-  background: var(--bg);
-  align-items: flex-start; padding: 54px 6vw 0;
-  justify-content: flex-start;
+.exp-full {
+  grid-column: 1 / -1;
+  min-height: 340px;
 }
-#s7 .inner { width: 100%; z-index: 2; }
-#s7 .tgrid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 36px; }
-#s7 .tier {
-  padding: 36px 28px;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,0.014);
-  display: flex; flex-direction: column; position: relative;
+
+@media (max-width: 768px) {
+  .exp-grid { grid-template-columns: 1fr; }
+  .exp-card { min-height: 360px; }
+  .exp-full { min-height: 300px; }
 }
-#s7 .tier.feat {
+
+/* ═══ LIFESTYLE GALLERY ═══ */
+.gallery {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+.gallery-img {
+  aspect-ratio: 1; overflow: hidden;
+}
+.gallery-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  filter: brightness(0.8);
+}
+.gallery-img:hover img { transform: scale(1.05); filter: brightness(1); }
+@media (max-width: 768px) {
+  .gallery { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ═══ MEMBERSHIP ═══ */
+.membership {
+  padding: 100px 0;
+  background: linear-gradient(170deg, var(--bg) 0%, var(--bg3) 50%, var(--bg) 100%);
+}
+.tier-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 20px; margin-top: 56px;
+}
+.tier {
+  padding: 40px 28px;
+  border: 1px solid var(--gold-dim);
+  background: rgba(255,255,255,0.012);
+  position: relative;
+  display: flex; flex-direction: column;
+}
+.tier.featured {
   border-color: var(--gold);
   background: rgba(201,169,110,0.04);
 }
-#s7 .badge {
-  position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
+.tier-badge {
+  position: absolute; top: -11px; left: 50%;
+  transform: translateX(-50%);
   background: var(--gold); color: var(--bg);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 8.5px; font-weight: 700;
-  letter-spacing: 0.22em; text-transform: uppercase;
-  padding: 3px 14px;
+  font-size: 8px; font-weight: 700;
+  letter-spacing: 0.24em; text-transform: uppercase;
+  padding: 4px 16px; white-space: nowrap;
 }
-#s7 .t-name {
+.tier-name {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(18px, 1.8vw, 25px);
-  font-weight: 700; color: var(--cream); margin-bottom: 6px;
+  font-size: 22px; font-weight: 700;
+  color: var(--cream); margin-bottom: 8px;
 }
-#s7 .t-price {
+.tier-price {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(34px, 3.8vw, 52px);
-  font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 3px;
-}
-#s7 .t-price sub {
-  font-size: 0.38em; font-family: 'DM Sans', sans-serif;
-  font-weight: 300; color: var(--cream2); vertical-align: baseline;
-}
-#s7 .t-period { font-size: 11px; color: var(--cream3); margin-bottom: 24px; }
-#s7 .t-feat {
-  font-size: clamp(10.5px, 1vw, 12.5px); font-weight: 300;
-  color: var(--cream2); padding: 7px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.045);
-  display: flex; gap: 10px; align-items: flex-start; line-height: 1.4;
-}
-#s7 .t-feat::before { content: '\2713'; color: var(--gold); font-size: 9px; flex-shrink: 0; margin-top: 1px; }
-#s7 .points-line {
-  margin-top: 28px; text-align: center;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(14px, 1.5vw, 19px);
-  font-style: italic; font-weight: 300; color: var(--cream2);
-}
-#s7 .points-line strong { color: var(--gold); }
-
-/* ---- SLIDE 8 — BUSINESS MODEL ---- */
-#s8 {
-  background: var(--bg);
-  align-items: flex-start; padding: 60px 7vw 0;
-  justify-content: flex-start;
-}
-#s8 .inner {
-  display: grid; grid-template-columns: 1.1fr 1fr;
-  gap: 72px; width: 100%; z-index: 2; align-items: start;
-}
-#s8 .rev-list { margin-top: 28px; }
-#s8 .rev-item {
-  padding: 17px 0; border-bottom: 1px solid rgba(255,255,255,0.055);
-  display: flex; justify-content: space-between; align-items: center; gap: 16px;
-}
-#s8 .rev-name { font-size: clamp(12px, 1.2vw, 14.5px); font-weight: 500; color: var(--cream); }
-#s8 .rev-tag {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 9px; font-weight: 600;
-  letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--gold); padding: 3px 10px;
-  border: 1px solid rgba(201,169,110,0.3); white-space: nowrap;
-}
-#s8 .metric { margin-bottom: 28px; }
-#s8 .metric-v {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(44px, 5.5vw, 76px);
+  font-size: clamp(40px, 4.5vw, 56px);
   font-weight: 700; color: var(--gold); line-height: 1;
 }
-#s8 .metric-l {
+.tier-price sub {
+  font-size: 0.35em; font-family: 'DM Sans', sans-serif;
+  font-weight: 300; color: var(--cream2); vertical-align: baseline;
+}
+.tier-period {
+  font-size: 12px; color: var(--cream3); margin-bottom: 28px;
+}
+.tier-feat {
+  font-size: 13px; font-weight: 300;
+  color: var(--cream2); padding: 9px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  display: flex; gap: 10px; align-items: flex-start; line-height: 1.5;
+}
+.tier-feat::before {
+  content: '\2713'; color: var(--gold);
+  font-size: 10px; flex-shrink: 0; margin-top: 2px;
+}
+.tier-cta {
+  display: block; text-align: center;
+  margin-top: auto; padding-top: 28px;
+}
+.tier-cta a {
+  display: inline-block; width: 100%;
+  padding: 14px 0; text-decoration: none;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  border: 1px solid var(--gold-dim);
+  color: var(--gold);
+  transition: all 0.3s;
+}
+.tier.featured .tier-cta a {
+  background: var(--gold); color: var(--bg); border-color: var(--gold);
+}
+.tier-cta a:hover { background: var(--gold); color: var(--bg); }
+.points-note {
+  margin-top: 36px; text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(16px, 1.8vw, 22px);
+  font-style: italic; font-weight: 300; color: var(--cream2);
+}
+.points-note strong { color: var(--gold); }
+
+@media (max-width: 768px) {
+  .tier-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+}
+
+/* ═══ WHO IT'S FOR ═══ */
+.who {
+  padding: 100px 0;
+  position: relative; overflow: hidden;
+}
+.who-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 72px; align-items: center;
+}
+.who-img {
+  position: relative; overflow: hidden;
+  aspect-ratio: 3/4;
+}
+.who-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(0.85);
+}
+.who-img::after {
+  content: ''; position: absolute; inset: 0;
+  border: 1px solid var(--gold-dim);
+}
+.who h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 600; line-height: 1.1;
+  margin-bottom: 20px;
+}
+.who h3 em { color: var(--gold); font-style: italic; }
+.who-traits {
+  margin-top: 28px;
+  border-top: 1px solid var(--gold-dim); padding-top: 20px;
+}
+.who-trait {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 14px; font-weight: 300; color: var(--cream2);
+}
+.who-trait::before {
+  content: '\2014'; color: var(--gold); font-size: 11px; flex-shrink: 0;
+}
+@media (max-width: 768px) {
+  .who-inner { grid-template-columns: 1fr; gap: 40px; }
+}
+
+/* ═══ BRAND VALUES ═══ */
+.brand-values {
+  padding: 80px 0;
+  border-top: 1px solid var(--gold-dim);
+  border-bottom: 1px solid var(--gold-dim);
+}
+.values-row {
+  display: flex; justify-content: center;
+  flex-wrap: wrap; gap: 40px 60px;
+}
+.value-item {
+  text-align: center;
+}
+.value-word {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(20px, 2.5vw, 30px);
+  font-weight: 600; color: var(--cream);
+  margin-bottom: 6px;
+}
+.value-sub {
+  font-size: 9px; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--cream3);
+}
+
+/* ═══ APPLICATION SECTION ═══ */
+.apply {
+  padding: 120px 0;
+  position: relative;
+  background: linear-gradient(170deg, var(--bg) 0%, var(--bg2) 50%, var(--bg) 100%);
+}
+.apply::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(45,90,61,0.08) 0%, transparent 65%);
+}
+.apply-inner {
+  position: relative; z-index: 1;
+  max-width: 680px; margin: 0 auto;
+  text-align: center;
+}
+.apply-inner .section-title { margin-bottom: 12px; }
+.apply-inner .section-title em { color: var(--gold); font-style: italic; }
+.apply-desc {
+  font-size: clamp(14px, 1.4vw, 16px);
+  font-weight: 300; line-height: 1.75;
+  color: var(--cream2); margin-bottom: 56px;
+}
+
+.app-form {
+  text-align: left;
+}
+.form-row {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin-bottom: 16px;
+}
+.form-group { margin-bottom: 16px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-label {
+  display: block; font-size: 10px; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--cream3); margin-bottom: 8px;
+}
+.form-input, .form-select, .form-textarea {
+  width: 100%; padding: 14px 16px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--gold-dim);
+  color: var(--cream); font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 400;
+  outline: none; transition: border-color 0.3s;
+  -webkit-appearance: none; appearance: none;
+}
+.form-input::placeholder { color: var(--cream3); }
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--gold);
+}
+.form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23c9a96e' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+}
+.form-select option { background: var(--bg); color: var(--cream); }
+.form-textarea {
+  resize: vertical; min-height: 100px;
+}
+.form-submit {
+  width: 100%; padding: 18px 0; margin-top: 8px;
+  background: var(--gold); color: var(--bg);
+  border: none; cursor: pointer;
   font-family: 'DM Sans', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.24em; text-transform: uppercase;
+  transition: all 0.3s;
+}
+.form-submit:hover { background: var(--gold2); }
+.form-note {
+  margin-top: 16px; text-align: center;
+  font-size: 11px; font-weight: 300; color: var(--cream3);
+}
+
+@media (max-width: 768px) {
+  .form-row { grid-template-columns: 1fr; }
+}
+
+/* ═══ FOOTER ═══ */
+footer {
+  padding: 60px 0 40px;
+  border-top: 1px solid var(--gold-dim);
+  text-align: center;
+}
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 700;
+  letter-spacing: 0.06em; color: var(--cream);
+  margin-bottom: 6px;
+}
+.footer-logo span { color: var(--gold); }
+.footer-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px; font-style: italic;
+  color: var(--gold); letter-spacing: 0.1em;
+  margin-bottom: 32px;
+}
+.footer-links {
+  display: flex; justify-content: center;
+  gap: 32px; margin-bottom: 40px; flex-wrap: wrap;
+}
+.footer-links a {
   font-size: 10px; font-weight: 500;
   letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--cream3); margin-top: 7px;
+  color: var(--cream3); text-decoration: none;
+  transition: color 0.3s;
 }
-#s8 .note {
-  font-size: clamp(11px, 1.1vw, 13.5px); font-weight: 300;
-  line-height: 1.75; color: var(--cream2);
-  border-left: 2px solid var(--gold); padding-left: 18px;
-  margin-top: 20px;
+.footer-links a:hover { color: var(--cream); }
+.footer-bottom {
+  font-size: 10px; color: rgba(240,234,216,0.15);
+  letter-spacing: 0.06em;
 }
+.footer-bottom a { color: rgba(240,234,216,0.15); text-decoration: none; }
 
-/* ---- SLIDE 9 — MARKET OPPORTUNITY ---- */
-#s9 {
-  background: var(--bg);
-  align-items: flex-start; padding: 58px 6vw 0;
-  justify-content: flex-start;
-}
-#s9 .inner { width: 100%; z-index: 2; }
-#s9 .mstats {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 0; margin-top: 44px;
-  border-top: 1px solid var(--border);
-}
-#s9 .ms {
-  padding: 36px 24px;
-  border-right: 1px solid var(--border);
-}
-#s9 .ms:last-child { border-right: none; }
-#s9 .ms-n {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(34px, 4vw, 58px);
-  font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 10px;
-}
-#s9 .ms-l {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 9.5px; font-weight: 600;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--cream3); margin-bottom: 10px;
-}
-#s9 .ms-d { font-size: clamp(10.5px, 1.05vw, 13px); line-height: 1.6; color: rgba(240,234,216,0.32); }
-#s9 .position {
-  margin-top: 40px; padding: 28px 36px;
-  background: rgba(201,169,110,0.04);
-  border: 1px solid var(--border); text-align: center;
-}
-#s9 .pos-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(17px, 2.1vw, 27px);
-  font-style: italic; font-weight: 300; color: var(--cream); line-height: 1.4;
-}
-#s9 .pos-text strong { color: var(--gold); }
-
-/* ---- SLIDE 10 — ROADMAP ---- */
-#s10 {
-  background: var(--bg);
-  align-items: flex-start; padding: 58px 6vw 0;
-  justify-content: flex-start;
-}
-#s10 .inner { width: 100%; z-index: 2; }
-#s10 .phases {
-  display: grid; grid-template-columns: 1fr 1fr 1fr;
-  gap: 0; margin-top: 44px; position: relative;
-}
-#s10 .phases::before {
-  content: '';
-  position: absolute; top: 26px;
-  left: calc(33.3% / 2); right: calc(33.3% / 2);
-  height: 1px;
-  background: linear-gradient(to right, var(--gold), rgba(201,169,110,0.25), var(--gold));
-}
-#s10 .phase { padding: 0 28px; padding-top: 56px; position: relative; }
-#s10 .pdot {
-  position: absolute; top: 18px; left: 50%; transform: translateX(-50%);
-  width: 16px; height: 16px; border-radius: 50%;
-  background: var(--bg); border: 2px solid var(--gold);
-}
-#s10 .pdot.on { background: var(--gold); }
-#s10 .p-num {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 9px; font-weight: 600;
-  letter-spacing: 0.26em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 10px;
-}
-#s10 .p-timeline {
-  display: inline-block;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 9.5px; font-weight: 600;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--gold); padding: 3px 10px;
-  border: 1px solid rgba(201,169,110,0.25);
-  margin-bottom: 16px;
-}
-#s10 .p-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(16px, 1.8vw, 24px);
-  font-weight: 600; color: var(--cream);
-  margin-bottom: 18px; line-height: 1.2;
-}
-#s10 .p-item {
-  font-size: clamp(10.5px, 1.05vw, 13px); font-weight: 300;
-  color: var(--cream2); padding: 5px 0 5px 14px;
-  border-bottom: 1px solid rgba(255,255,255,0.038);
-  position: relative; line-height: 1.45;
-}
-#s10 .p-item::before { content: '\00B7'; position: absolute; left: 3px; color: var(--gold); }
-
-/* ---- SLIDE 11 — THE BRAND ---- */
-#s11 {
-  background: linear-gradient(155deg, #060f08 0%, #0c2218 45%, #060f08 100%);
-  padding: 0 6vw;
-}
-#s11 .inner {
-  display: grid; grid-template-columns: 1fr 1.1fr;
-  gap: 72px; width: 100%; z-index: 2; align-items: center;
-}
-#s11 .b-name {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(56px, 8vw, 110px);
-  font-weight: 700; line-height: 0.9;
-  color: var(--cream); letter-spacing: 0.04em; margin-bottom: 8px;
-}
-#s11 .b-sub {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(16px, 2vw, 26px);
-  font-style: italic; font-weight: 300;
-  color: var(--gold); letter-spacing: 0.12em; margin-bottom: 40px;
-}
-#s11 .b-word {
-  display: flex; align-items: center; gap: 14px; margin-bottom: 10px;
-}
-#s11 .b-word-t {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 10px; font-weight: 600;
-  letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--cream2); white-space: nowrap;
-}
-#s11 .b-word-l { flex: 1; height: 1px; background: rgba(201,169,110,0.13); }
-#s11 .palette { display: flex; height: 72px; margin-bottom: 28px; overflow: hidden; }
-#s11 .swatch { flex: 1; }
-#s11 .refs-label {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 9px; font-weight: 600;
-  letter-spacing: 0.26em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 14px;
-}
-#s11 .refs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
-#s11 .ref {
-  padding: 14px 18px; border: 1px solid var(--border);
-  font-size: 12px; font-weight: 500; color: var(--cream2);
-}
-#s11 .ref span {
-  display: block; font-size: 9px; font-weight: 400;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  color: rgba(201,169,110,0.45); margin-top: 3px;
-}
-#s11 .sig {
-  padding: 18px 20px; border: 1px solid rgba(201,169,110,0.25);
-  font-size: clamp(11px, 1.1vw, 13.5px); font-weight: 300;
-  color: var(--cream2); line-height: 1.65;
-}
-#s11 .sig strong { color: var(--gold); }
-
-/* ---- SLIDE 12 — THE ASK ---- */
-#s12 {
-  background: var(--bg);
-  flex-direction: column; text-align: center; padding: 0 9vw;
-}
-#s12 .radial2 {
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(45,90,61,0.13) 0%, transparent 65%);
-}
-#s12 .inner { max-width: 880px; z-index: 2; width: 100%; }
-#s12 .headline {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(34px, 5vw, 72px);
-  font-weight: 700; color: var(--cream);
-  line-height: 1.05; margin-bottom: 20px;
-}
-#s12 .headline em { color: var(--gold); font-style: italic; }
-#s12 .desc {
-  font-size: clamp(12.5px, 1.3vw, 16px); font-weight: 300;
-  line-height: 1.75; color: var(--cream2);
-  max-width: 600px; margin: 0 auto 48px;
-}
-#s12 .paths {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 20px; text-align: left; margin-bottom: 48px;
-}
-#s12 .path {
-  padding: 32px 28px;
-  border: 1px solid var(--border);
-  background: rgba(201,169,110,0.025);
-}
-#s12 .path.pri { border-color: var(--gold); background: rgba(201,169,110,0.055); }
-#s12 .path-lbl {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 9px; font-weight: 700;
-  letter-spacing: 0.26em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 10px;
-}
-#s12 .path-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(16px, 1.8vw, 24px);
-  font-weight: 600; color: var(--cream); margin-bottom: 10px;
-}
-#s12 .path-body { font-size: clamp(11px, 1.05vw, 13.5px); font-weight: 300; line-height: 1.7; color: var(--cream2); }
-#s12 .close-mark {
-  font-family: 'Playfair Display', serif;
-  font-size: 12px; font-weight: 400;
-  letter-spacing: 0.3em; text-transform: uppercase; color: var(--cream3);
-}
-#s12 .close-mark strong { color: var(--gold); }
-
-/* ---- TOUCH SUPPORT ---- */
-@media (hover: none) {
-  .nav { opacity: 0.5; }
+/* ═══ NOISE OVERLAY ═══ */
+.noise {
+  position: fixed; inset: 0; z-index: 9999;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.018;
 }
 </style>
 </head>
 <body>
 
-<div class="deck" id="deck">
 <div class="noise"></div>
 
-<!-- SLIDE 1 — COVER -->
-<div class="slide active" id="s1">
-  <div class="radial"></div>
-  <div class="ring ring1"></div>
-  <div class="ring ring2"></div>
-  <div class="ring ring3"></div>
-  <div class="inner">
-    <div class="emblem a"><div class="emblem-v">v</div></div>
-    <div class="name a">Club Vita</div>
-    <div class="tagline a">Live The Standard</div>
-    <div class="ornament a">
+<!-- ═══ NAVIGATION ═══ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Club <span>Vita</span></a>
+    <div class="nav-links" id="navLinks">
+      <a href="#vision">Vision</a>
+      <a href="#experience">Experience</a>
+      <a href="#membership">Membership</a>
+      <a href="#apply" class="nav-cta">Apply Now</a>
+    </div>
+    <div class="nav-toggle" id="navToggle" onclick="document.getElementById('navLinks').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-emblem"><span>v</span></div>
+    <h1>Club Vita</h1>
+    <div class="hero-tagline">Live The Standard</div>
+    <div class="hero-ornament">
       <div class="line line-l"></div>
       <div class="diamond"></div>
       <div class="line line-r"></div>
     </div>
-    <div class="location a">A Lifestyle Membership Club &nbsp;&middot;&nbsp; Southern California</div>
+    <div class="hero-location">A Lifestyle Membership Club &middot; Southern California</div>
+    <a href="#apply" class="hero-cta">Apply for Founding Membership</a>
   </div>
-</div>
-
-<!-- SLIDE 2 — THE HOOK -->
-<div class="slide" id="s2">
-  <div class="noise"></div>
-  <div class="inner">
-    <div class="ghost">02</div>
-    <div class="eyebrow a">The Idea</div>
-    <div class="quote a">&ldquo;You already know the life<br>you want to build.<br>The only question is<br><em>who you&rsquo;re building it with.</em>&rdquo;</div>
-    <div class="rule a"></div>
-    <div class="subline a">Club Vita exists to answer that question.</div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="arrow"></div>
   </div>
-</div>
+</section>
 
-<!-- SLIDE 3 — THE GAP -->
-<div class="slide" id="s3">
-  <div class="noise"></div>
-  <div class="inner">
-    <div class="eyebrow a">The Problem</div>
-    <div class="display-sm a">Nothing exists that builds<br>the whole person.</div>
-    <div class="grid a">
-      <div class="card">
-        <div class="card-label">Country Clubs</div>
-        <div class="card-title">Great access.<br>Wrong crowd.</div>
-        <div class="card-body">Built for an older generation. Stiff, inaccessible dues. The atmosphere doesn&rsquo;t reflect the ambitious, athletic 25&ndash;35 lifestyle at all.</div>
+<!-- ═══ QUOTE ═══ -->
+<section class="quote-section">
+  <div class="container">
+    <div class="quote-text reveal">
+      &ldquo;You already know the life you want to build. The only question is <em>who you&rsquo;re building it with.</em>&rdquo;
+    </div>
+    <div class="rule rule-center reveal reveal-delay-1"></div>
+    <div class="quote-attr reveal reveal-delay-2">Club Vita exists to answer that question.</div>
+  </div>
+</section>
+
+<!-- ═══ PROBLEM ═══ -->
+<section class="problem" id="problem">
+  <div class="container">
+    <div class="eyebrow reveal">The Problem</div>
+    <div class="section-title reveal reveal-delay-1">Nothing exists that builds<br>the whole person.</div>
+    <div class="problem-grid">
+      <div class="problem-card reveal">
+        <div class="label">Country Clubs</div>
+        <h3>Great access.<br>Wrong crowd.</h3>
+        <p>Built for an older generation. Stiff, inaccessible dues. The atmosphere doesn&rsquo;t reflect the ambitious, athletic 25&ndash;35 lifestyle.</p>
       </div>
-      <div class="card">
-        <div class="card-label">Gym Culture</div>
-        <div class="card-title">Great discipline.<br>Zero breadth.</div>
-        <div class="card-body">Strong physical results. But no financial development, no social programming, no real community. You show up alone and leave alone.</div>
+      <div class="problem-card reveal reveal-delay-1">
+        <div class="label">Gym Culture</div>
+        <h3>Great discipline.<br>Zero breadth.</h3>
+        <p>Strong physical results. But no financial growth, no social programming, no real community. You show up alone and leave alone.</p>
       </div>
-      <div class="card vita">
-        <div class="card-label">Club Vita</div>
-        <div class="card-title">The whole person.<br>Together.</div>
-        <div class="card-body">Athletic. Financial. Spiritual. Relational. Club Vita is the first membership community in SoCal that develops every dimension of a high-performing life.</div>
+      <div class="problem-card vita reveal reveal-delay-2">
+        <div class="label">Club Vita</div>
+        <h3>The whole person.<br>Together.</h3>
+        <p>Athletic. Financial. Spiritual. Relational. The first membership community in SoCal that develops every dimension of a high-performing life.</p>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- SLIDE 4 — THE VISION -->
-<div class="slide" id="s4">
-  <div class="noise"></div>
-  <div class="inner">
-    <div class="eyebrow a">The Vision</div>
-    <div class="stmt a">
-      Club Vita is the physical manifestation<br>
-      of the life you are <strong>already building.</strong><br><br>
-      A recurring environment where the most driven<br>
-      people in Southern California show up together &mdash;<br>
+<!-- ═══ VISION ═══ -->
+<section class="vision" id="vision">
+  <div class="container">
+    <div class="eyebrow reveal">The Vision</div>
+    <div class="vision-stmt reveal reveal-delay-1">
+      Club Vita is the physical manifestation of the life you are <strong>already building.</strong>
+      A recurring environment where the most driven people in Southern California show up together &mdash;
       and leave <strong>better than they arrived.</strong>
     </div>
-    <div class="rule a" style="margin:28px auto;"></div>
-    <div class="pillars a">
+    <div class="rule rule-center reveal reveal-delay-2"></div>
+    <div class="pillars reveal reveal-delay-3">
       <div class="pillar"><div class="pillar-name">Physical</div></div>
       <div class="pillar"><div class="pillar-name">Financial</div></div>
       <div class="pillar"><div class="pillar-name">Spiritual</div></div>
@@ -731,384 +775,335 @@ html, body {
       <div class="pillar"><div class="pillar-name">Community</div></div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- SLIDE 5 — THE MEMBER -->
-<div class="slide" id="s5">
-  <div class="noise"></div>
-  <div class="inner">
-    <div class="left">
-      <div class="eyebrow a">The Member</div>
-      <div class="portrait a">Young. Driven.<br><em>Already winning</em> &mdash;<br>and hungry for more.</div>
-      <div class="rule a"></div>
-      <div class="body a">22 to 35. Competitive by nature. Income-earner or entrepreneur. Fitness-forward. Craving a network of peers who are genuinely building something. They consume discipline content. They travel. They dress intentionally. They want the room that matches their ambition &mdash; and they haven&rsquo;t found it yet.</div>
-    </div>
-    <div class="right">
-      <div class="stats a">
-        <div class="stat">
-          <div class="stat-v">IE/OC</div>
-          <div class="stat-l">Footprint</div>
-        </div>
-        <div class="stat">
-          <div class="stat-v">22&ndash;35</div>
-          <div class="stat-l">Target Age</div>
-        </div>
-        <div class="stat">
-          <div class="stat-v">$60K+</div>
-          <div class="stat-l">Income Range</div>
-        </div>
-        <div class="stat">
-          <div class="stat-v">5</div>
-          <div class="stat-l">Life Pillars</div>
+<!-- ═══ EXPERIENCE ═══ -->
+<section class="experience" id="experience">
+  <div class="container">
+    <div class="eyebrow reveal">The Experience</div>
+    <div class="section-title reveal reveal-delay-1">Every event is produced.<br>Every pillar is activated.</div>
+    <div class="section-sub reveal reveal-delay-2">From tennis courts to investment roundtables, every touchpoint is designed to develop the holistic you &mdash; and connect you with people doing the same.</div>
+  </div>
+  <div class="exp-grid" style="margin-top: 56px;">
+    <!-- PHYSICAL -->
+    <div class="exp-card reveal">
+      <div class="exp-card-bg" style="background-image:url('https://images.unsplash.com/photo-1554068865-24cecd4e34b8?w=900&q=80')"></div>
+      <div class="exp-card-content">
+        <div class="pillar-tag">Physical</div>
+        <h3>Athletic Excellence</h3>
+        <p>Compete, train, and build discipline alongside peers who take their bodies as seriously as their businesses.</p>
+        <div class="exp-events">
+          <span>Tennis Clinics</span>
+          <span>Pickleball Leagues</span>
+          <span>Golf Scrambles</span>
+          <span>Group Lifting</span>
+          <span>Run Club</span>
+          <span>Rooftop Yoga</span>
         </div>
       </div>
-      <div class="desires a">
-        <div class="d">A tribe that reflects their real values</div>
-        <div class="d">Sports + social &mdash; not just networking events</div>
-        <div class="d">Financial intelligence in the room</div>
-        <div class="d">Access to premium venues and experiences</div>
-        <div class="d">Autonomy, excellence, and discipline modeled</div>
+    </div>
+    <!-- FINANCIAL -->
+    <div class="exp-card reveal reveal-delay-1">
+      <div class="exp-card-bg" style="background-image:url('https://images.unsplash.com/photo-1560472355-536de3962603?w=900&q=80')"></div>
+      <div class="exp-card-content">
+        <div class="pillar-tag">Financial</div>
+        <h3>Wealth &amp; Strategy</h3>
+        <p>Surround yourself with people who think about money differently. Real conversations about building, investing, and scaling.</p>
+        <div class="exp-events">
+          <span>Investment Roundtables</span>
+          <span>Wealth Workshops</span>
+          <span>Entrepreneur Panels</span>
+          <span>Career Strategy</span>
+        </div>
+      </div>
+    </div>
+    <!-- RELATIONAL -->
+    <div class="exp-card reveal">
+      <div class="exp-card-bg" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=80')"></div>
+      <div class="exp-card-content">
+        <div class="pillar-tag">Relational</div>
+        <h3>Curated Connection</h3>
+        <p>Intimate dinners. Members-only socials. Travel experiences. The relationships that change the trajectory of your life.</p>
+        <div class="exp-events">
+          <span>Networking Dinners</span>
+          <span>Members-Only Socials</span>
+          <span>Quarterly Travel</span>
+          <span>Annual Black Tie Gala</span>
+        </div>
+      </div>
+    </div>
+    <!-- SPIRITUAL -->
+    <div class="exp-card reveal reveal-delay-1">
+      <div class="exp-card-bg" style="background-image:url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=900&q=80')"></div>
+      <div class="exp-card-content">
+        <div class="pillar-tag">Spiritual</div>
+        <h3>Intentional Living</h3>
+        <p>Clarity, presence, and purpose. The inner work that makes the outer results sustainable.</p>
+        <div class="exp-events">
+          <span>Morning Mindset</span>
+          <span>Journaling Workshops</span>
+          <span>Meditation Events</span>
+          <span>Vision Board Evenings</span>
+        </div>
+      </div>
+    </div>
+    <!-- COMMUNITY — full width -->
+    <div class="exp-card exp-full reveal">
+      <div class="exp-card-bg" style="background-image:url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=1400&q=80')"></div>
+      <div class="exp-card-content">
+        <div class="pillar-tag">Community</div>
+        <h3>The Room You&rsquo;ve Been Looking For</h3>
+        <p>Vita Points. Merch drops. Member spotlights. Annual awards. This isn&rsquo;t just a club &mdash; it&rsquo;s the standard your life organizes around.</p>
+        <div class="exp-events">
+          <span>Vita Points Rewards</span>
+          <span>Merch Store</span>
+          <span>Member Spotlights</span>
+          <span>Private Community</span>
+          <span>Annual Member Awards</span>
+        </div>
       </div>
     </div>
   </div>
+</section>
+
+<!-- ═══ LIFESTYLE GALLERY ═══ -->
+<div class="gallery">
+  <div class="gallery-img"><img src="https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=600&q=80" alt="Tennis" loading="lazy"></div>
+  <div class="gallery-img"><img src="https://images.unsplash.com/photo-1596727362302-b8d891c42ab8?w=600&q=80" alt="Golf lifestyle" loading="lazy"></div>
+  <div class="gallery-img"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80" alt="Fitness training" loading="lazy"></div>
+  <div class="gallery-img"><img src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=600&q=80" alt="Social dinner" loading="lazy"></div>
 </div>
 
-<!-- SLIDE 6 — THE EXPERIENCE -->
-<div class="slide" id="s6">
-  <div class="noise"></div>
-  <div class="inner">
-    <div class="eyebrow a">The Experience</div>
-    <div class="display-sm a">Every event is produced. Every pillar is activated.</div>
-    <div class="pgrid a">
-      <div class="p">
-        <div class="p-icon">&#127934;</div>
-        <div class="p-name">Physical</div>
-        <div class="p-ev">Sunday Tennis Clinics</div>
-        <div class="p-ev">Pickleball Leagues</div>
-        <div class="p-ev">Golf Scrambles</div>
-        <div class="p-ev">Group Lifting Sessions</div>
-        <div class="p-ev">Rooftop Yoga</div>
-        <div class="p-ev">Run Clubs</div>
+<!-- ═══ MEMBERSHIP ═══ -->
+<section class="membership" id="membership">
+  <div class="container">
+    <div style="text-align:center;">
+      <div class="eyebrow reveal">Membership</div>
+      <div class="section-title reveal reveal-delay-1">Show up. Earn points.<br>Live the standard.</div>
+    </div>
+    <div class="tier-grid">
+      <div class="tier reveal">
+        <div class="tier-name">Vita</div>
+        <div class="tier-price">$49<sub>/mo</sub></div>
+        <div class="tier-period">Founding member rate</div>
+        <div class="tier-feat">2 events per month included</div>
+        <div class="tier-feat">Vita Points on every attendance</div>
+        <div class="tier-feat">Club Vita community access</div>
+        <div class="tier-feat">Store discounts</div>
+        <div class="tier-cta"><a href="#apply">Apply Now</a></div>
       </div>
-      <div class="p">
-        <div class="p-icon">&#128176;</div>
-        <div class="p-name">Financial</div>
-        <div class="p-ev">Investment Roundtables</div>
-        <div class="p-ev">Wealth Builder Workshops</div>
-        <div class="p-ev">Entrepreneurship Panels</div>
-        <div class="p-ev">Financial Freedom Series</div>
-        <div class="p-ev">Career Strategy Sessions</div>
+      <div class="tier featured reveal reveal-delay-1">
+        <div class="tier-badge">Most Popular</div>
+        <div class="tier-name">Vita+</div>
+        <div class="tier-price">$99<sub>/mo</sub></div>
+        <div class="tier-period">Best value membership</div>
+        <div class="tier-feat">Unlimited monthly events</div>
+        <div class="tier-feat">Priority access + early registration</div>
+        <div class="tier-feat">Double points on all attendance</div>
+        <div class="tier-feat">Exclusive Vita+ monthly experiences</div>
+        <div class="tier-feat">Featured in Club Vita content</div>
+        <div class="tier-cta"><a href="#apply">Apply Now</a></div>
       </div>
-      <div class="p">
-        <div class="p-icon">&#129495;</div>
-        <div class="p-name">Spiritual</div>
-        <div class="p-ev">Morning Mindset Sessions</div>
-        <div class="p-ev">Journaling Workshops</div>
-        <div class="p-ev">Meditation Events</div>
-        <div class="p-ev">Intentional Living Talks</div>
-        <div class="p-ev">Vision Board Evenings</div>
-      </div>
-      <div class="p">
-        <div class="p-icon">&#129309;</div>
-        <div class="p-name">Relational</div>
-        <div class="p-ev">Curated Networking Dinners</div>
-        <div class="p-ev">Members-Only Socials</div>
-        <div class="p-ev">Quarterly Travel Drops</div>
-        <div class="p-ev">Annual Black Tie Gala</div>
-        <div class="p-ev">Partner Introductions</div>
-      </div>
-      <div class="p">
-        <div class="p-icon">&#127942;</div>
-        <div class="p-name">Community</div>
-        <div class="p-ev">Vita Points Rewards System</div>
-        <div class="p-ev">Club Vita Merch Store</div>
-        <div class="p-ev">Member Spotlights</div>
-        <div class="p-ev">Private Group Access</div>
-        <div class="p-ev">Annual Member Awards</div>
+      <div class="tier reveal reveal-delay-2">
+        <div class="tier-name">Vita Elite</div>
+        <div class="tier-price">$199<sub>/mo</sub></div>
+        <div class="tier-period">Full access tier</div>
+        <div class="tier-feat">All Vita+ benefits included</div>
+        <div class="tier-feat">2 monthly guest passes</div>
+        <div class="tier-feat">Private Elite experiences</div>
+        <div class="tier-feat">Travel event priority</div>
+        <div class="tier-feat">Annual Gala included</div>
+        <div class="tier-cta"><a href="#apply">Apply Now</a></div>
       </div>
     </div>
-    <div class="cta a">&ldquo;This isn&rsquo;t a gym or a networking event. It&rsquo;s the place you&rsquo;ve been looking for.&rdquo;</div>
+    <div class="points-note reveal">Every dollar earns <strong>Vita Points</strong> &mdash; redeemable for gear, upgrades, and travel.</div>
   </div>
-</div>
+</section>
 
-<!-- SLIDE 7 — MEMBERSHIP -->
-<div class="slide" id="s7">
-  <div class="noise"></div>
-  <div class="inner">
-    <div class="eyebrow a">Membership</div>
-    <div class="display-sm a">Show up. Earn points. Live the standard.</div>
-    <div class="tgrid a">
-      <div class="tier">
-        <div class="t-name">Vita</div>
-        <div class="t-price">$49<sub>/mo</sub></div>
-        <div class="t-period">Founding member rate</div>
-        <div class="t-feat">2 events per month included</div>
-        <div class="t-feat">Vita Points on every attendance</div>
-        <div class="t-feat">Club Vita community access</div>
-        <div class="t-feat">Store discounts</div>
+<!-- ═══ WHO IT'S FOR ═══ -->
+<section class="who" id="who">
+  <div class="container">
+    <div class="who-inner">
+      <div class="who-img reveal">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80" alt="Driven young professional" loading="lazy">
       </div>
-      <div class="tier feat">
-        <div class="badge">Most Popular</div>
-        <div class="t-name">Vita+</div>
-        <div class="t-price">$99<sub>/mo</sub></div>
-        <div class="t-period">Best value membership</div>
-        <div class="t-feat">Unlimited monthly events</div>
-        <div class="t-feat">Priority access + early registration</div>
-        <div class="t-feat">Double points on all attendance</div>
-        <div class="t-feat">Exclusive Vita+ monthly experiences</div>
-        <div class="t-feat">Featured in Club Vita content</div>
-      </div>
-      <div class="tier">
-        <div class="t-name">Vita Elite</div>
-        <div class="t-price">$199<sub>/mo</sub></div>
-        <div class="t-period">Full access tier</div>
-        <div class="t-feat">All Vita+ benefits</div>
-        <div class="t-feat">2 monthly guest passes</div>
-        <div class="t-feat">Private Elite experiences</div>
-        <div class="t-feat">Travel event priority</div>
-        <div class="t-feat">Annual Gala included</div>
-      </div>
-    </div>
-    <div class="points-line a">Every dollar earns <strong>Vita Points</strong> &mdash; redeemable for gear, upgrades, and travel.</div>
-  </div>
-</div>
-
-<!-- SLIDE 8 — BUSINESS MODEL -->
-<div class="slide" id="s8">
-  <div class="noise"></div>
-  <div class="inner">
-    <div class="left">
-      <div class="eyebrow a">Business Model</div>
-      <div class="display-sm a">Recurring revenue.<br>Multiple streams.</div>
-      <div class="rev-list a">
-        <div class="rev-item"><div class="rev-name">Monthly Membership Dues</div><div class="rev-tag">Recurring</div></div>
-        <div class="rev-item"><div class="rev-name">Premium Event Upgrades</div><div class="rev-tag">Transactional</div></div>
-        <div class="rev-item"><div class="rev-name">Merchandise Store</div><div class="rev-tag">Retail</div></div>
-        <div class="rev-item"><div class="rev-name">Brand Partnerships</div><div class="rev-tag">Partnership</div></div>
-        <div class="rev-item"><div class="rev-name">Travel Experience Packages</div><div class="rev-tag">Premium</div></div>
-      </div>
-    </div>
-    <div class="right">
-      <div class="metric a">
-        <div class="metric-v">$24K+</div>
-        <div class="metric-l">Monthly Recurring at 300 Members</div>
-      </div>
-      <div class="metric a">
-        <div class="metric-v">300</div>
-        <div class="metric-l">Member Target &mdash; Full Maturity</div>
-      </div>
-      <div class="note a">At 300 members averaging $80/month, base MRR reaches $24,000 &mdash; before event revenue, brand deals, or merchandise. The real ceiling is significantly higher.</div>
-    </div>
-  </div>
-</div>
-
-<!-- SLIDE 9 — MARKET -->
-<div class="slide" id="s9">
-  <div class="noise"></div>
-  <div class="inner">
-    <div class="eyebrow a">The Opportunity</div>
-    <div class="display-sm a">The right market. The right moment.<br>Nobody has built this yet.</div>
-    <div class="mstats a">
-      <div class="ms">
-        <div class="ms-n">4M+</div>
-        <div class="ms-l">Adults in OC &amp; IE</div>
-        <div class="ms-d">One of the fastest-growing regions in the U.S. &mdash; combined population of Orange County and the Inland Empire.</div>
-      </div>
-      <div class="ms">
-        <div class="ms-n">38%</div>
-        <div class="ms-l">Ages 22&ndash;40</div>
-        <div class="ms-d">A disproportionately young, ambitious demographic concentrated in this region &mdash; Club Vita&rsquo;s exact audience.</div>
-      </div>
-      <div class="ms">
-        <div class="ms-n">$0</div>
-        <div class="ms-l">Competitors</div>
-        <div class="ms-d">No existing club in the region blends athletics, finance, social programming, and real community for this demographic.</div>
-      </div>
-      <div class="ms">
-        <div class="ms-n">Now</div>
-        <div class="ms-l">The Moment</div>
-        <div class="ms-d">Post-pandemic demand for authentic in-person community has never been higher. This generation is actively searching.</div>
-      </div>
-    </div>
-    <div class="position a">
-      <div class="pos-text">&ldquo;The country club was built for your grandfather.<br>Club Vita was built for <strong>you.</strong>&rdquo;</div>
-    </div>
-  </div>
-</div>
-
-<!-- SLIDE 10 — ROADMAP -->
-<div class="slide" id="s10">
-  <div class="noise"></div>
-  <div class="inner">
-    <div class="eyebrow a">The Roadmap</div>
-    <div class="display-sm a">Three phases. One standard.</div>
-    <div class="phases a">
-      <div class="phase">
-        <div class="pdot on"></div>
-        <div class="p-timeline">Months 1&ndash;3</div>
-        <div class="p-num">Phase 01</div>
-        <div class="p-title">Prove the Model</div>
-        <div class="p-item">25&ndash;50 founding members</div>
-        <div class="p-item">2 events/month &mdash; athletic + social</div>
-        <div class="p-item">Brand + Instagram launched</div>
-        <div class="p-item">Every event filmed cinematically</div>
-        <div class="p-item">Founding rate locked in</div>
-      </div>
-      <div class="phase">
-        <div class="pdot"></div>
-        <div class="p-timeline">Months 4&ndash;9</div>
-        <div class="p-num">Phase 02</div>
-        <div class="p-title">Build the Brand</div>
-        <div class="p-item">Grow to 150 members</div>
-        <div class="p-item">Golf + premium events added</div>
-        <div class="p-item">First brand partnership secured</div>
-        <div class="p-item">Points + store system launched</div>
-        <div class="p-item">First travel experience hosted</div>
-      </div>
-      <div class="phase">
-        <div class="pdot"></div>
-        <div class="p-timeline">Months 10&ndash;18</div>
-        <div class="p-num">Phase 03</div>
-        <div class="p-title">Scale the Standard</div>
-        <div class="p-item">300+ members across OC + IE</div>
-        <div class="p-item">All 5 pillars fully programmed</div>
-        <div class="p-item">Multiple brand partnerships active</div>
-        <div class="p-item">Annual Gala established</div>
-        <div class="p-item">The club in Southern California</div>
+      <div class="reveal reveal-delay-1">
+        <div class="eyebrow">The Member</div>
+        <h3>Young. Driven.<br><em>Already winning</em> &mdash;<br>and hungry for more.</h3>
+        <div class="rule"></div>
+        <div class="section-sub" style="max-width:none;">22 to 35. Competitive by nature. Fitness-forward. Craving a network of peers who are genuinely building something. They want the room that matches their ambition &mdash; and they haven&rsquo;t found it yet.</div>
+        <div class="who-traits">
+          <div class="who-trait">A tribe that reflects their real values</div>
+          <div class="who-trait">Sports + social &mdash; not just networking events</div>
+          <div class="who-trait">Financial intelligence in the room</div>
+          <div class="who-trait">Access to premium venues and experiences</div>
+          <div class="who-trait">Autonomy, excellence, and discipline modeled</div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- SLIDE 11 — THE BRAND -->
-<div class="slide" id="s11">
-  <div class="noise"></div>
-  <div class="inner">
-    <div class="left">
-      <div class="eyebrow a">Brand Identity</div>
-      <div class="b-name a">Club<br>Vita</div>
-      <div class="b-sub a">Live The Standard</div>
-      <div class="b-words a">
-        <div class="b-word"><div class="b-word-t">Elevated</div><div class="b-word-l"></div></div>
-        <div class="b-word"><div class="b-word-t">Athletic</div><div class="b-word-l"></div></div>
-        <div class="b-word"><div class="b-word-t">Intentional</div><div class="b-word-l"></div></div>
-        <div class="b-word"><div class="b-word-t">Connected</div><div class="b-word-l"></div></div>
-        <div class="b-word"><div class="b-word-t">Autonomous</div><div class="b-word-l"></div></div>
+<!-- ═══ BRAND VALUES ═══ -->
+<section class="brand-values">
+  <div class="container">
+    <div class="values-row reveal">
+      <div class="value-item">
+        <div class="value-word">Elevated</div>
+        <div class="value-sub">Above the noise</div>
       </div>
-    </div>
-    <div class="right">
-      <div class="palette a">
-        <div class="swatch" style="background:#06100a;"></div>
-        <div class="swatch" style="background:#0d2016;"></div>
-        <div class="swatch" style="background:#2d5a3d;"></div>
-        <div class="swatch" style="background:#c9a96e;"></div>
-        <div class="swatch" style="background:#f0ead8;"></div>
+      <div class="value-item">
+        <div class="value-word">Athletic</div>
+        <div class="value-sub">Body as foundation</div>
       </div>
-      <div class="refs-label a">Inspired By</div>
-      <div class="refs a">
-        <div class="ref">Sunset Tennis Club<span>Community + Premium Aesthetic</span></div>
-        <div class="ref">Malbon Golf<span>Lifestyle + Brand Identity</span></div>
-        <div class="ref">Equinox<span>Experience Standards</span></div>
-        <div class="ref">Startup Mindset<span>Ethos + Culture</span></div>
+      <div class="value-item">
+        <div class="value-word">Intentional</div>
+        <div class="value-sub">Nothing accidental</div>
       </div>
-      <div class="refs-label a">The Signature Element</div>
-      <div class="sig a">Every time you show up, you earn. <strong>Vita Points</strong> accumulate across every event and pillar &mdash; redeemable for gear, experiences, and access. The club rewards your consistency.</div>
+      <div class="value-item">
+        <div class="value-word">Connected</div>
+        <div class="value-sub">Built on real bonds</div>
+      </div>
+      <div class="value-item">
+        <div class="value-word">Autonomous</div>
+        <div class="value-sub">Own your path</div>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- SLIDE 12 — THE ASK -->
-<div class="slide" id="s12">
-  <div class="radial2"></div>
-  <div class="noise"></div>
-  <div class="inner">
-    <div class="eyebrow a">The Ask</div>
-    <div class="headline a">Become a<br><em>Founding Member.</em></div>
-    <div class="desc a">Club Vita is opening its doors to a select group of founding members in Southern California. This is the ground floor. The rate locks. The community shapes. The standard gets set &mdash; by the people in the room at the beginning.</div>
-    <div class="paths a">
-      <div class="path pri">
-        <div class="path-lbl">For Members</div>
-        <div class="path-title">Join as a Founding Member</div>
-        <div class="path-body">Lock in $49/month before the rate increases. Get priority event access, earn double points in Year 1, and help define what Club Vita becomes.</div>
-      </div>
-      <div class="path">
-        <div class="path-lbl">For Partners</div>
-        <div class="path-title">Build With Us</div>
-        <div class="path-body">Brand sponsors, venue partners, and collaborators &mdash; Club Vita is building the premium lifestyle community for SoCal&rsquo;s next generation. Limited early slots available.</div>
-      </div>
+<!-- ═══ APPLY ═══ -->
+<section class="apply" id="apply">
+  <div class="container">
+    <div class="apply-inner">
+      <div class="eyebrow reveal">Founding Membership</div>
+      <div class="section-title reveal reveal-delay-1">Become a<br><em>Founding Member.</em></div>
+      <div class="apply-desc reveal reveal-delay-2">Club Vita is opening its doors to a select group of founding members in Southern California. This is the ground floor. The rate locks. The community shapes. The standard gets set &mdash; by the people in the room at the beginning.</div>
+
+      <form class="app-form reveal reveal-delay-3" action="https://formsubmit.co/2190socialmedia.v3@gmail.com" method="POST">
+        <!-- FormSubmit config -->
+        <input type="hidden" name="_subject" value="New Club Vita Application">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="">
+        <input type="text" name="_honey" style="display:none">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name</label>
+            <input type="text" name="first_name" class="form-input" placeholder="First name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name</label>
+            <input type="text" name="last_name" class="form-input" placeholder="Last name" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" class="form-input" placeholder="you@email.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone</label>
+            <input type="tel" name="phone" class="form-input" placeholder="(555) 000-0000">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Age</label>
+            <select name="age_range" class="form-select" required>
+              <option value="" disabled selected>Select range</option>
+              <option>18 - 24</option>
+              <option>25 - 29</option>
+              <option>30 - 35</option>
+              <option>36+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Location</label>
+            <select name="location" class="form-select" required>
+              <option value="" disabled selected>Select area</option>
+              <option>Orange County</option>
+              <option>Inland Empire</option>
+              <option>LA County</option>
+              <option>San Diego</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Membership Interest</label>
+          <select name="tier_interest" class="form-select">
+            <option value="" disabled selected>Select tier</option>
+            <option>Vita — $49/mo</option>
+            <option>Vita+ — $99/mo (Most Popular)</option>
+            <option>Vita Elite — $199/mo</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">What excites you most about Club Vita?</label>
+          <textarea name="motivation" class="form-textarea" placeholder="Tell us what you're looking for in a community..." rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Instagram Handle</label>
+          <input type="text" name="instagram" class="form-input" placeholder="@yourhandle">
+        </div>
+        <button type="submit" class="form-submit">Submit Application</button>
+        <div class="form-note">Founding membership is limited. We review every application personally.</div>
+      </form>
     </div>
-    <div class="close-mark a"><strong>Club Vita</strong> &nbsp;&middot;&nbsp; Southern California &nbsp;&middot;&nbsp; clubvita.com</div>
   </div>
-</div>
+</section>
 
-</div>
-
-<!-- NAV -->
-<div class="nav nav-l" onclick="go(cur-1)">
-  <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-</div>
-<div class="nav nav-r" onclick="go(cur+1)">
-  <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-</div>
-
-<!-- PROGRESS -->
-<div id="progress">
-  <div class="dots" id="dots"></div>
-  <div class="counter" id="counter">01 / 12</div>
-</div>
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="container">
+    <div class="footer-logo">Club <span>Vita</span></div>
+    <div class="footer-tagline">Live The Standard</div>
+    <div class="footer-links">
+      <a href="#vision">Vision</a>
+      <a href="#experience">Experience</a>
+      <a href="#membership">Membership</a>
+      <a href="#apply">Apply</a>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Club Vita. Southern California.
+      <br>A <a href="https://www.instagram.com/2190sales_/" target="_blank" rel="noopener">2190</a> venture.
+    </div>
+  </div>
+</footer>
 
 <script>
-const TOTAL = 12;
-let cur = 0;
-const slides = document.querySelectorAll('.slide');
-const dotsEl = document.getElementById('dots');
-const ctrEl  = document.getElementById('counter');
+// ─── Scroll reveal ───
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+revealEls.forEach(el => observer.observe(el));
 
-for (let i = 0; i < TOTAL; i++) {
-  const d = document.createElement('div');
-  d.className = 'dot' + (i===0?' on':'');
-  d.onclick = () => go(i);
-  dotsEl.appendChild(d);
-}
-
-function go(n) {
-  const next = ((n % TOTAL) + TOTAL) % TOTAL;
-  slides[cur].classList.remove('active');
-  dotsEl.children[cur].classList.remove('on');
-  cur = next;
-  const s = slides[cur];
-  s.classList.add('active');
-  dotsEl.children[cur].classList.add('on');
-  ctrEl.textContent = String(cur+1).padStart(2,'0') + ' / ' + String(TOTAL).padStart(2,'0');
-
-  // reset animations
-  const els = s.querySelectorAll('.a');
-  els.forEach(el => { el.style.animation='none'; el.offsetHeight; el.style.animation=''; });
-}
-
-document.addEventListener('keydown', e => {
-  if (e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' ') { e.preventDefault(); go(cur+1); }
-  if (e.key==='ArrowLeft' ||e.key==='ArrowUp') { e.preventDefault(); go(cur-1); }
-});
-
-// Touch/swipe support
-let touchStartX = 0;
-let touchStartY = 0;
-document.addEventListener('touchstart', e => {
-  touchStartX = e.changedTouches[0].screenX;
-  touchStartY = e.changedTouches[0].screenY;
-}, { passive: true });
-document.addEventListener('touchend', e => {
-  const dx = e.changedTouches[0].screenX - touchStartX;
-  const dy = e.changedTouches[0].screenY - touchStartY;
-  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
-    dx < 0 ? go(cur+1) : go(cur-1);
-  }
+// ─── Nav scroll state ───
+const nav = document.getElementById('nav');
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
 }, { passive: true });
 
-document.getElementById('deck').addEventListener('click', e => {
-  if (!e.target.closest('.nav') && !e.target.closest('.dot')) go(cur+1);
+// ─── Close mobile nav on link click ───
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+  });
 });
+
+// ─── Set form redirect to current page ───
+const nextInput = document.querySelector('input[name="_next"]');
+if (nextInput) nextInput.value = window.location.href;
 </script>
+
 </body>
 </html>
